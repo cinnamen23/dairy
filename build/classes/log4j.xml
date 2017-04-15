@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	 <!--  날짜별 로그  -->  
+    <appender name="dailyout" class="org.apache.log4j.DailyRollingFileAppender">  
+        <!-- 이것은 날짜별로  로그를 남김. 파일명.확장자.DatePattern으로 정의 함-->  
+        <param name="file" value="C:\\zzz\\dailyout.log"/>  
+        <param name="Append" value="true"/>  
+        <param name="DatePattern" value="'.'yyMMdd"/>  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern" value="%t> [%d{yyyy-MM-dd HH:mm:ss}] [%c{1}] [%L] [%p] %m %n"/>  
+        </layout>  
+    </appender>  
+	
+	
+	<!-- Application Loggers -->
+	<logger name="org.zerock.filter">  <!-- 패키지 명에서 이거로 시작하는 모든 얘들은 warn으로 준다  -->
+		<level value="warn" />
+	</logger>
+	
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="warn" />     <!-- 운영자 용도 개발자 용도는 info나   -->
+		<appender-ref ref="console" /> <!-- 콜솔만 남기면 시스템아웃만 출력??  엄툰 이거는 설정만 해주면 된다  -->
+		<appender-ref ref="dailyout" />
+		
+	</root>
+	
+</log4j:configuration>
